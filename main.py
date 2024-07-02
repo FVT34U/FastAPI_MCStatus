@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import FastAPI
-from .dto import User, ServerPage, Comment, CommentRate, ServerRate
+from .dto import UserBase, User, ServerPage, Comment, CommentRate, ServerRate
 from fastapi.responses import RedirectResponse
 
 app = FastAPI()
@@ -15,5 +15,5 @@ def home():
     return []
 
 @app.post("/login")
-def post_login(user: User):
+def post_login(user: UserBase):
     return {"login": True}

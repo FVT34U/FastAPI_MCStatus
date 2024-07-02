@@ -6,11 +6,12 @@ class RoleEnum(str, Enum):
     User = 'user'
     Admin = 'admin'
 
-class User(BaseModel):
-    id: uuid.uuid4
-    login: str
+class UserBase(BaseModel):
     email: EmailStr
+    password: str = Field(min_length=6, max_length=30)
+
+class User(UserBase):
+    id: uuid.uuid4
     nickname: str = Field(min_length=3, max_length=25)
-    password: str
     bio: str | None = Field(default=None, max_length=300)
     role: RoleEnum = RoleEnum.User
